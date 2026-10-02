@@ -1,17 +1,17 @@
 ---
 name: analizador-lexico-mini-c
-description: Especificación del analizador léxico de Mini-C definida por <Nombre del estudiante>. Úsala cuando debas implementar, probar o corregir el lexer de Mini-C: indica alfabeto, palabras reservadas, patrones por tipo de token, políticas de separación, prioridades y formato de salida.
+description: Especificación del analizador léxico de Mini-C definida por Six Seven. Úsala cuando debas implementar, probar o corregir el lexer de Mini-C: indica alfabeto, palabras reservadas, patrones por tipo de token, políticas de separación, prioridades y formato de salida.
 ---
 
 # Analizador léxico de Mini-C
 
-Especificación elaborada por **<Nombre del estudiante>** (grupo <Grupo>) en el Taller N°6 de Lenguajes Formales y Autómatas (UTP-FISC). Implementa el analizador **exactamente** como se describe aquí. Si algo no está definido, pregunta antes de asumir; no inventes tokens, reglas ni excepciones.
+Especificación elaborada por **Six Seven** (grupo 1SF134) en el Taller N°6 de Lenguajes Formales y Autómatas (UTP-FISC). Implementa el analizador **exactamente** como se describe aquí. Si algo no está definido, pregunta antes de asumir; no inventes tokens, reglas ni excepciones.
 
 ## 1. Alfabeto Σ
 
 Sensible a mayúsculas. Cualquier carácter fuera de este conjunto es un error léxico.
 
-\t, \n, \r, espacio, `!`, `(`, `)`, `+`, `-`, `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `;`, `=`, `A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`, `W`, `X`, `Y`, `Z`, `_`, `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `m`, `n`, `o`, `p`, `q`, `r`, `s`, `t`, `u`, `v`, `w`, `x`, `y`, `z`, `{`, `}`
+espacio, `!`, `(`, `)`, `+`, `-`, `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `;`, `=`, `A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`, `W`, `X`, `Y`, `Z`, `_`, `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `m`, `n`, `o`, `p`, `q`, `r`, `s`, `t`, `u`, `v`, `w`, `x`, `y`, `z`, `{`, `}`
 
 ## 2. Palabras reservadas
 
@@ -26,21 +26,21 @@ Notación: `"abc"` literal · `[a-z]` clase · `|` unión · `*` cero o más · 
 
 | Tipo de token | Patrón |
 |---|---|
+| `ASSIGN` | `"="` |
+| `EOF` | `""` |
+| `EQUAL_EQUAL` | `"=="` |
 | `KW_INT` | `"int"` |
 | `KW_WHILE` | `"while"` |
-| `IDENTIFIER` | `[A-Za-z_][A-Za-z0-9_]*` |
-| `INTEGER_LITERAL` | `[0-9]#` |
-| `ASSIGN` | `"="` |
-| `PLUS` | `"+"` |
-| `MINUS` | `"-"` |
-| `EQUAL_EQUAL` | `"=="` |
-| `NOT_EQUAL` | `"!="` |
 | `LPAREN` | `"("` |
 | `RPAREN` | `")"` |
 | `LBRACE` | `"{"` |
 | `RBRACE` | `"}"` |
+| `PLUS` | `"+"` |
+| `MINUS` | `"-"` |
+| `NOT_EQUAL` | `"!="` |
 | `SEMICOLON` | `";"` |
-| `EOF` | `""` |
+| `IDENTIFIER` | `[a-zA-Z_][a-zA-Z0-9_]*` |
+| `INTEGER_LITERAL` | `[0-9]#` |
 
 No existen otros tipos de token.
 
@@ -60,7 +60,7 @@ No existen otros tipos de token.
 - Grupo 1 (de mayor a menor prioridad): `KW_INT` = `KW_WHILE` > `IDENTIFIER`
 - Grupo 2 (de mayor a menor prioridad): `EQUAL_EQUAL` > `ASSIGN`
 
-Sin conflicto de prioridad: `INTEGER_LITERAL`, `PLUS`, `MINUS`, `NOT_EQUAL`, `LPAREN`, `RPAREN`, `LBRACE`, `RBRACE`, `SEMICOLON`, `EOF`.
+Sin conflicto de prioridad: `EOF`, `SEMICOLON`, `PLUS`, `MINUS`, `NOT_EQUAL`, `LPAREN`, `RPAREN`, `LBRACE`, `RBRACE`, `INTEGER_LITERAL`.
 
 ## 6. Estructura del token y diagnósticos
 
